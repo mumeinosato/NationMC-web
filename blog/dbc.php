@@ -1,4 +1,5 @@
 <?php
+
 function dbConnect() {
     define( 'DB_HOST', 'localhost');
     define( 'DB_USER', 'blog');
@@ -8,13 +9,14 @@ function dbConnect() {
     try {
 
         $option = array(
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::MYSQL_ATTR_MULTI_STATEMENTS => false
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::MYSQL_ATTR_MULTI_STATEMENTS => false,
+            \PDO::ATTR_EMULATE_PREPARES => false
         );
-        $dbh = new PDO('mysql:charset=UTF8;dbname='.DB_NAME.';host='.DB_HOST , DB_USER, DB_PASS, $option);
+        $dbh = new \PDO('mysql:charset=UTF8;dbname='.DB_NAME.';host='.DB_HOST , DB_USER, DB_PASS, $option);
         //echo "接続成功";
 
-    } catch(PDOException $e) {
+    } catch(\PDOException $e) {
 
         // 接続エラーのときエラー内容を取得する
         $error_message[] = $e->getMessage();
@@ -28,12 +30,10 @@ function getAllBlog() {
     $dbh = dbConnect();
     $sql = 'SELECT * FROM blog';
     $stmt = $dbh->query($sql);
-    $result = $stmt->fetchall(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchall(\PDO::FETCH_ASSOC);
     return $result;
     $dbh = null;
 }
-
-$blogData = getAllBlog();
 
 function setCategoryName($category) {
     if ($category == '1') {
@@ -45,30 +45,25 @@ function setCategoryName($category) {
     }
 }
 
+function getBlog($id) {
+    if(empty($id)) {
+        exit('お探しのページは見つかりませんでした');
+    }
+    
+    $dbh = dbConnect();
+    
+    $stmt = $dbh->prepare('SELECT * FROM blog Where id = :id');
+    $stmt->bindValue(':id', (int)$id, \PDO::PARAM_INT);
+    
+    $stmt->execute();
+    
+    $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+    
+    if(!$result) {
+        exit('お探しのページは見つかりませんでした');
+    }
+    
+    return $result;
+}
+
 ?>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ブログ一覧</title>
-</head>
-<body>
-    <h2>ブログ一覧</h2>
-    <table>
-        <tr>
-            <th>No.</th>
-            <th>タイトル</th>
-            <th>カテゴリ</th>
-        </tr>
-        <?php foreach($blogData as $column): ?>
-        <tr>
-            <td><?php echo $column['id'] ?></td>
-            <td><?php echo $column['title'] ?></td>
-            <td><?php echo setCategoryName($column['category']) ?></td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
-</body>
-</html>
