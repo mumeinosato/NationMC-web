@@ -24,7 +24,7 @@
                             <li><a href="#" class="nav-link px-2 text-white">お問い合わせ</a></li>
                             <li><a href="#" class="nav-link px-2 text-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">その他</a>
                                 <ul class="bg-dark dropdown-menu">
-                                    <li><a href="#" class="nav-link px-2 text-white dropdown-item">ブログ</a></li>
+                                    <li><a href="blog" class="nav-link px-2 text-white dropdown-item">ブログ</a></li>
                                     <li><a href="wiki" class="nav-link px-2 text-white dropdown-item">Wiki</a></li>
                                     <li><a href="board" class="nav-link px-2 text-white dropdown-item">掲示板?</a></li>
                                 </ul>
@@ -35,7 +35,6 @@
                         </form>
                         <div class="text-end">
                             <button type="button" class="btn btn-outline-light me-2">ログイン</button>
-                            <button type="button" class="btn btn-outline-light me-2">サインイン</button>
                         </div>                 
                     </div>
                 </div>
