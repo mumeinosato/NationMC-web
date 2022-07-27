@@ -1,6 +1,6 @@
 <?php
 
-require_once('/blog/blog.php');
+require_once('blog.php');
 $blog = new Blog();
 $blogData = $blog->getAll();
 
