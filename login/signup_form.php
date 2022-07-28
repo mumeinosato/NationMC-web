@@ -4,11 +4,12 @@ session_start();
 require_once 'functions.php';
 require_once '../classes/UserLogic.php';
 
-$result = UserLogic::checkLogin(); 
-if($result){
-    header('Location: mypage.php');
-    return;
+if (!$result) {
+    $_SESSION['login_err'] = 'ログインしてください';
+    header('Location: index.php');
+    return; 
 }
+$login_user = $_SESSION['login_user'];
 
 $login_err = isset($_SESSION['login_err']) ? $_SESSION['login_err'] :null;
 unset($_SESSION['login_err']);

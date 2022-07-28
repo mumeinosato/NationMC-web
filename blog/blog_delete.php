@@ -5,4 +5,4 @@ $blog = new Blog();
 $result = $blog->delete($_GET['id']);
 
 ?>
-<p><a href="/blog">戻る</p>
+<p><a href="admin.php">戻る</p>

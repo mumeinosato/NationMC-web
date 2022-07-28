@@ -7,4 +7,4 @@ $blog->blogValidate($blogs);
 $blog->blogUpdate($blogs);
 
 ?>
-<p><a href="/blog">戻る</p>
+<p><a href="admin.php">戻る</p>

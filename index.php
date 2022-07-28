@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -34,7 +37,7 @@
                             <input type="search" class="form-control form-control-dark" placeholder="検索" aria-label="Search">
                         </form>
                         <div class="text-end">
-                            <button onclick="location.href='/login/'" type="button" class="btn btn-outline-light me-2">ログイン</button>
+                            <button onclick="location.href='/login/'" type="button" class="btn btn-outline-light me-2">管理画面へ</button>
                         </div>                 
                     </div>
                 </div>
